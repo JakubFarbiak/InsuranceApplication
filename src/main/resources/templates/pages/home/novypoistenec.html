@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout.html :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="~{fragments/layout.html :: header}">
+</header>
+
+<div class="container mt-5">
+    <h1>Nový poistenec</h1>
+    <form th:action="@{/save-poistenec}" method="post" th:object="${novyPoistenec}">
+    <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Meno</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Jano">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="janonovak88@gmail.com">
+                </div>
+                <div class="mb-3">
+                    <label for="street" class="form-label">Ulica a číslo</label>
+                    <input type="text" class="form-control" id="street" th:field="*{street}" placeholder="Enter your street">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Priezvisko</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Novák">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Telefón</label>
+                    <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="789 452 225">
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">Mesto</label>
+                    <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Bratislava">
+                </div>
+                <div class="mb-3">
+                    <label for="postNumber" class="form-label">PSČ</label>
+                    <input type="text" class="form-control" id="postNumber" th:field="*{postNumber}" placeholder="100 00">
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary">Uložiť</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

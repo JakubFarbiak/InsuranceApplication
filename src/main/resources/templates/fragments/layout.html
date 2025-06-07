@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <!-- Part copied from SaBi's website -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Insurance App"/>
+    <meta name="keywords" content="app, insurance, list"/>
+    <meta name="author" content="Jakub"/>
+    <title>Insurance App</title>
+
+    <!-- Links to the necessary styles, icons and scripts -->
+    <link rel="stylesheet" th:href="@{/styles/lightbox.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/styles/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/styles/styles.css}" type="text/css"/>
+
+    <script th:src="@{/scripts/lightbox-plus-jquery.min.js}"></script>
+</head>
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">PoistenciApp</a>
+            <div class="navbar-nav mx-auto"> <!-- This will center the first group of links -->
+                <a class="nav-link" th:href="@{/}">Poistenci</a>
+                <a class="nav-link" href="#">Poistený</a>
+                <a class="nav-link" href="#">Udalosti</a>
+                <a class="nav-link" href="#">O aplikácii...</a>
+            </div>
+            <div class="navbar-nav"> <!-- This is the second group of links -->
+                <a class="nav-link" href="#">Prihlásiť</a>
+                <a class="nav-link" href="#">Registrovať</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>
