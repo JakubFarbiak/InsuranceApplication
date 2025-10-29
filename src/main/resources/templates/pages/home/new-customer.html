@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout.html :: head}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Nový Poistenec</title>
 </head>
 <body>
-<header th:replace="~{fragments/layout.html :: header}">
-</header>
+<header th:replace="~{fragments/layout.html :: header}"></header>
 
 <div class="container mt-5">
     <h1>Nový poistenec</h1>
-    <form th:action="@{/save-poistenec}" method="post" th:object="${novyPoistenec}">
-    <div class="row">
+
+    <form th:action="@{/customers/save}" method="post" th:object="${customer}">
+        <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">Meno</label>
@@ -49,15 +49,9 @@
 
         <div class="text-center mt-3">
             <button type="submit" class="btn btn-primary">Uložiť</button>
+            <a th:href="@{/customers}" class="btn btn-secondary">Zrušiť</a>
         </div>
     </form>
 </div>
-
-
-
-
-
-
-
 </body>
 </html>
