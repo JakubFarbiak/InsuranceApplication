@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -77,4 +80,15 @@ public class Customer {
 
     public String getPostNumber() { return postNumber; }
     public void setPostNumber(String postNumber) { this.postNumber = postNumber; }
+
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Insurance> insurances = new ArrayList<>();
+
+    public List<Insurance> getInsurances() {
+        return insurances;
+    }
+    public void setInsurances(List<Insurance> insurances) {
+        this.insurances = insurances;
+    }
 }

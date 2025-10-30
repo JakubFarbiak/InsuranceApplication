@@ -27,7 +27,7 @@
                 <td th:text="${customer.firstName + ' ' + customer.lastName}">Meno</td>
                 <td th:text="${customer.street + ', ' + customer.city}">Adresa</td>
                 <td>
-                    <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-sm btn-warning">Editovať</a>
+                    <a th:href="@{/customers/detail/{id}(id=${customer.id})}" class="btn btn-sm btn-warning">Editovať</a>
                     <a th:href="@{/customers/delete/{id}(id=${customer.id})}"
                        class="btn btn-sm btn-danger"
                        onclick="return confirm('Naozaj chcete zmazať tohto poistenca?');">

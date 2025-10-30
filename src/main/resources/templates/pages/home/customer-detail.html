@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout.html :: head}">
+    <title>Detail poistenca</title>
+</head>
+<body>
+<header th:replace="~{fragments/layout.html :: header}"></header>
+
+<div class="container mt-5">
+
+    <h1 th:text="${customer.firstName + ' ' + customer.lastName}">Meno poistenca</h1>
+    <hr>
+
+    <!-- Customer Information -->
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Meno:</strong> <span th:text="${customer.firstName}"></span></p>
+            <p><strong>Priezvisko:</strong> <span th:text="${customer.lastName}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${customer.email}"></span></p>
+            <p><strong>Telefón:</strong> <span th:text="${customer.phone}"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Ulica a číslo:</strong> <span th:text="${customer.street}"></span></p>
+            <p><strong>Mesto:</strong> <span th:text="${customer.city}"></span></p>
+            <p><strong>PSČ:</strong> <span th:text="${customer.postNumber}"></span></p>
+        </div>
+    </div>
+
+    <hr>
+    <h3>Poistenia</h3>
+
+    <!-- Insurance Table -->
+    <table class="table table-bordered table-striped text-center mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Poistenie</th>
+            <th>Čiastka</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="insurance : ${insuranceList}">
+            <td th:text="${insurance.name}">Poistenie</td>
+            <td th:text="${insurance.amount}">Čiastka</td>
+            <td>
+                <a th:href="@{/insurance/edit/{id}(id=${insurance.id})}" class="btn btn-sm btn-warning">Editovať</a>
+
+                <a th:href="@{/insurance/delete/{id}(id=${insurance.id})}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Naozaj chcete odstrániť toto poistenie?');">
+                    Odstrániť
+                </a>
+            </td>
+        </tr>
+        <!-- If no insurances -->
+        <tr th:if="${#lists.isEmpty(insuranceList)}">
+            <td colspan="3"><i>Poistenec zatiaľ nemá žiadne poistenie.</i></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Buttons -->
+    <div class="text-center mt-4">
+        <a th:href="@{/customers/insurance/new/{id}(id=${customer.id})}" class="btn btn-primary">
+            Pridať poistenie
+        </a>
+
+        <a class="btn btn-warning me-2"
+           th:href="@{/customers/edit/{id}(id=${customer.id})}">
+            Editovať poistenca
+        </a>
+
+        <a class="btn btn-danger"
+           th:href="@{/customers/delete/{id}(id=${customer.id})}"
+           onclick="return confirm('Naozaj chcete odstrániť tohto poistenca?');">
+            Odstrániť poistenca
+        </a>
+    </div>
+
+</div>
+</body>
+</html>
