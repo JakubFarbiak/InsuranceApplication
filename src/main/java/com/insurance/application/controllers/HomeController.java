@@ -87,6 +87,43 @@ public class HomeController {
         return "redirect:/customers/detail/" + customerId;
     }
 
+    // Delete insurance
+    @GetMapping("/insurance/delete/{id}")
+    public String deleteInsurance(@PathVariable Long id) {
+        Insurance insurance = insuranceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid insurance Id:" + id));
+        Long customerId = insurance.getCustomer().getId();
+        insuranceRepository.delete(insurance);
+        return "redirect:/customers/detail/" + customerId;
+    }
+
+    // Show edit form
+    @GetMapping("/insurance/edit/{id}")
+    public String showEditInsuranceForm(@PathVariable Long id, Model model) {
+        Insurance insurance = insuranceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid insurance Id:" + id));
+        model.addAttribute("insurance", insurance);
+        model.addAttribute("customer", insurance.getCustomer());
+        return "pages/home/new-insurance"; // reuse the same form
+    }
+
+    // Save edited insurance
+    @PostMapping("/insurance/update/{id}")
+    public String updateInsurance(@PathVariable Long id, @ModelAttribute Insurance insurance) {
+        Insurance existingInsurance = insuranceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid insurance Id:" + id));
+
+        existingInsurance.setType(insurance.getType());
+        existingInsurance.setAmount(insurance.getAmount());
+        existingInsurance.setSubject(insurance.getSubject());
+        existingInsurance.setValidFrom(insurance.getValidFrom());
+        existingInsurance.setValidTo(insurance.getValidTo());
+
+        insuranceRepository.save(existingInsurance);
+        return "redirect:/customers/detail/" + existingInsurance.getCustomer().getId();
+    }
+
+
 
 }
 

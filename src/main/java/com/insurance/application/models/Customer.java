@@ -88,7 +88,9 @@ public class Customer {
     public List<Insurance> getInsurances() {
         return insurances;
     }
+
     public void setInsurances(List<Insurance> insurances) {
         this.insurances = insurances;
     }
+
 }

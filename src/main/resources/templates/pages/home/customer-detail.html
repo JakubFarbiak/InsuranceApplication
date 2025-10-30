@@ -40,12 +40,12 @@
         </thead>
         <tbody>
         <tr th:each="insurance : ${insuranceList}">
-            <td th:text="${insurance.name}">Poistenie</td>
+            <td th:text="${insurance.type}">Poistenie</td>
             <td th:text="${insurance.amount}">Čiastka</td>
             <td>
-                <a th:href="@{/insurance/edit/{id}(id=${insurance.id})}" class="btn btn-sm btn-warning">Editovať</a>
+                <a th:href="@{/customers/insurance/edit/{id}(id=${insurance.id})}" class="btn btn-sm btn-warning">Editovať</a>
 
-                <a th:href="@{/insurance/delete/{id}(id=${insurance.id})}"
+                <a th:href="@{/customers/insurance/delete/{id}(id=${insurance.id})}"
                    class="btn btn-sm btn-danger"
                    onclick="return confirm('Naozaj chcete odstrániť toto poistenie?');">
                     Odstrániť

@@ -11,10 +11,10 @@
     <h1 th:text="'Pridať poistenie k ' + ${customer.firstName} + ' ' + ${customer.lastName}"></h1>
     <hr>
 
-    <form th:action="@{/customers/insurance/save/{customerId}(customerId=${customer.id})}"
+    <form th:action="@{${insurance.id} != null ? '/customers/insurance/update/' + ${insurance.id} : '/customers/insurance/save/' + ${customer.id}}"
           method="post" th:object="${insurance}">
 
-        <div class="mb-3">
+    <div class="mb-3">
             <label class="form-label">Poistenie</label>
             <select class="form-select" th:field="*{type}">
                 <option value="" disabled selected>Vyberte typ poistenia</option>
