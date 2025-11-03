@@ -2,15 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout.html :: head}">
     <meta charset="UTF-8">
-    <title>Nový Poistenec</title>
+    <title th:text="${customer.id} != null ? 'Upraviť poistenca' : 'Nový poistenec'">Nový poistenec</title>
 </head>
 <body>
 <header th:replace="~{fragments/layout.html :: header}"></header>
 
 <div class="container mt-5">
-    <h1>Nový poistenec</h1>
+    <h1 th:text="${customer.id} != null ? 'Upraviť poistenca' : 'Nový poistenec'"></h1>
 
-    <form th:action="@{/customers/save}" method="post" th:object="${customer}">
+    <!-- ✅ Dynamic form action -->
+    <form th:action="@{${customer.id} != null ? '/customers/update/' + ${customer.id} : '/customers/save'}"
+          method="post" th:object="${customer}">
+
+        <!-- ✅ Needed for editing -->
+        <input type="hidden" th:field="*{id}"/>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
@@ -48,7 +54,9 @@
         </div>
 
         <div class="text-center mt-3">
-            <button type="submit" class="btn btn-primary">Uložiť</button>
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${customer.id} != null ? 'Uložiť zmeny' : 'Uložiť'"></span>
+            </button>
             <a th:href="@{/customers}" class="btn btn-secondary">Zrušiť</a>
         </div>
     </form>

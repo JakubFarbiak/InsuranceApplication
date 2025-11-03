@@ -123,6 +123,32 @@ public class HomeController {
         return "redirect:/customers/detail/" + existingInsurance.getCustomer().getId();
     }
 
+    @GetMapping("/edit/{id}")
+    public String showEditCustomerForm(@PathVariable Long id, Model model) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid customer Id:" + id));
+
+        model.addAttribute("customer", customer);
+        return "pages/home/new-customer"; // reuse the same form
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateCustomer(@PathVariable Long id, @ModelAttribute Customer updatedCustomer) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid customer Id:" + id));
+
+        customer.setFirstName(updatedCustomer.getFirstName());
+        customer.setLastName(updatedCustomer.getLastName());
+        customer.setEmail(updatedCustomer.getEmail());
+        customer.setPhone(updatedCustomer.getPhone());
+        customer.setStreet(updatedCustomer.getStreet());
+        customer.setCity(updatedCustomer.getCity());
+        customer.setPostNumber(updatedCustomer.getPostNumber());
+
+        customerRepository.save(customer);
+
+        return "redirect:/customers/detail/" + id;
+    }
 
 
 }
